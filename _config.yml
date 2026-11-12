@@ -28,16 +28,12 @@ github:
   username: MyounghoonRaymond # change to your GitHub username
 
 
+# 소셜 링크 및 작성자 정보
 social:
-  # Change to your full name.
-  # It will be displayed as the default author of the posts and the copyright owner in the Footer
   name: Myounghoon Kim
-  email: raymondorca0713@gmail.com # change to your email address
-  fediverse_handle: # fill in your fediverse handle. E.g. "@username@domain.com"
+  email: raymondorca0713@gmail.com
   links:
-    # The first element serves as the copyright owner's link
-   https://github.com/MyounghoonRaymond
-   
+    - https://github.com/MyounghoonRaymond  # <-- 이 부분이 템플릿 기본값(링크가 비어 있거나 잘못된 값)으로 되어 있어서 에러가 납니다!
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username

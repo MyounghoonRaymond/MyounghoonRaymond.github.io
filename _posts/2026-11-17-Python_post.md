@@ -77,3 +77,30 @@ tags: [security, genai, python, blog]
     3. 각 줄의 끝에는 줄바꿈 문자(`\n`)가 그대로 포함되어 리스트에 저장됩니다.
     4. 파일의 용량이 매우 클 때는 메모리를 한 번에 많이 차지할 수 있으므로 주의해야 합니다.
 36. Q: """ """ 와 ''' '''의 차이점이 있나요? A: 기능 상의 차이는 전혀 없습니다. 둘 다 파이썬에서 여러 줄 문자열을 만들거나, 함수/클래스 바로 아래에 설명글을 적어두는 독스트링(Docstring, 문서 문자열) 용도로 사용하는 완전히 동일한 문법입니다.
+37. 매개변수에 *이 있으면 그 뒤에 오는 인자는 name = value 형식으로 와야 합니다.
+38. ex) def greet(greeting, *, name):
+    print(f"{greeting}, {name}!") 에서 올바른 호출: '*' 뒤의 name은 반드시 name=value 형태로 전달 => greet("안녕하세요", name="지수")  # 출력: 안녕하세요, 지수!
+39. *자체는 매개변수 이름을 차지하지 않는 구분자(delimiter) 역할만 합니다.
+40. Q: 왜 *를 쓸까요? A: 호출 의도를 명확히 하기 위해서입니다. (가독성) True/False 같은 불리언(boolean) 값이나 비슷한 타입의 인자가 여러 개 있을 때, 위치로만 넘기면 의미를 알기 어렵습니다.
+41. ex) 나쁜 예: 괄호 안의 True, False가 무슨 뜻인지 한눈에 안 들어옵니다.
+
+    1. save_file("report.txt", True, False)
+
+       좋은 예: 무엇을 설정하는지 명확합니다.
+
+       def save_file(filename, *, overwrite=False, create_dirs=True): ...
+       save_file("report.txt", overwrite=True, create_dirs=False)
+42. *와 반대로 /은 "/의 앞은 위치 전용"을 뜻합니다.
+43. ex) def calc(a, b, /, *, mode="add"):
+
+    if mode == "add":
+    return a + b
+    return a - b
+
+    calc(10, 5, mode="sub")  # 5
+
+    calc(a=10, b=5, mode="sub") -> TypeError ('/' 앞은 위치 인자만 가능합니다.)
+
+    calc(10, 5, "sub")          -> TypeError ('*' 뒤는 키워드 인자만 가능합니다.)
+44. *와 / 둘을 조합해 아주 엄격하게 인터페이스를 설계할 수도 있습니다.
+45.
